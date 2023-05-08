@@ -7,6 +7,7 @@ namespace WebSocketChat.Model;
 /// Represents a message in the message data store.
 /// </summary>
 /// <author>Anirudh Pandita</author>
+[Serializable]
 public class Message
 {
     /// <summary>
