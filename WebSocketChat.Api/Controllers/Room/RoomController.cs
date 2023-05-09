@@ -65,8 +65,7 @@ public class RoomController
             var messageEntity = new Message
             {
                 Text = message,
-                Username = senderUserName,
-                TimeStamp = DateTime.UtcNow.Millisecond
+                Username = senderUserName
             };
             await _messageDataSource.InsertMessage(messageEntity);
 

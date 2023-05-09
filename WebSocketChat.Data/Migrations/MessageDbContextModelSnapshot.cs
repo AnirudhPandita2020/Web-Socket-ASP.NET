@@ -32,8 +32,8 @@ namespace WebSocketChat.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long>("TimeStamp")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Username")
                         .IsRequired()

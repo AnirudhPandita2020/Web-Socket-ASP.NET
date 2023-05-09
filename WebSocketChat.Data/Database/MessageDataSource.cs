@@ -24,7 +24,8 @@ public class MessageDataSource : IMessageDataSource
     /// Gets all messages from the message data store.
     /// </summary>
     /// <returns>A task representing the asynchronous operation that retrieves the list of messages.</returns>
-    public async Task<List<Message>> GetAllMessages() => await GetAllMessageQuery(_context);
+    public async Task<List<Message>> GetAllMessages() =>
+        await _context.Messages.OrderByDescending(message => message.TimeStamp).ToListAsync();
 
     /// <summary>
     /// Inserts a message into the message data store.
@@ -36,13 +37,4 @@ public class MessageDataSource : IMessageDataSource
         await _context.Messages.AddAsync(message);
         await _context.SaveChangesAsync();
     }
-
-    
-    /// <summary>
-    /// A compiled query to get all messages from the message data store in descending order of time stamp.
-    /// </summary>
-    private static readonly Func<MessageDbContext, Task<List<Message>>> GetAllMessageQuery =
-        EF.CompileAsyncQuery(
-            (MessageDbContext context) =>
-                context.Messages.OrderByDescending(message => message.TimeStamp).ToList());
 }

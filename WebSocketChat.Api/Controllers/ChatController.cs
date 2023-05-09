@@ -74,4 +74,7 @@ public class ChatController : ControllerBase
             }
         }
     }
+
+    [HttpGet("/api/chat")]
+    public async Task<IActionResult> GetAllMessages() => Ok(await _roomController.GetAllMessages());
 }

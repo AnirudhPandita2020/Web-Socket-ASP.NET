@@ -12,7 +12,7 @@ using WebSocketChat.Database;
 namespace WebSocketChat.Migrations
 {
     [DbContext(typeof(MessageDbContext))]
-    [Migration("20230508162426_Initial")]
+    [Migration("20230509084158_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -35,8 +35,8 @@ namespace WebSocketChat.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long>("TimeStamp")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Username")
                         .IsRequired()
