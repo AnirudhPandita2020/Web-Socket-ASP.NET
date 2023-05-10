@@ -47,14 +47,12 @@ public class ChatController : ControllerBase
                 while (webSocket.State == WebSocketState.Open)
                 {
                     var buffer = new byte[1024 * 4];
-                    var receiveResult =
-                        await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+                    var receiveText = await webSocket.ReceiveTextAsync();
 
-                    if (receiveResult.MessageType == WebSocketMessageType.Text)
+                    if (receiveText != string.Empty)
                     {
                         // Send the received message to all members in the chat room.
-                        await _roomController.SendMessage(username,
-                            Encoding.UTF8.GetString(buffer, 0, receiveResult.Count));
+                        await _roomController.SendMessage(username,receiveText);
                     }
                 }
             }

@@ -69,13 +69,7 @@ public class RoomController
             };
             await _messageDataSource.InsertMessage(messageEntity);
 
-            // Serialize the message entity and send it to the member's WebSocket connection
-            var parsedMessage = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(messageEntity));
-            await member.Socket.SendAsync(
-                new ArraySegment<byte>(parsedMessage),
-                WebSocketMessageType.Text,
-                true,
-                CancellationToken.None);
+            await member.Socket.SendTextAsync(JsonSerializer.Serialize(messageEntity));
         }
     }
 
